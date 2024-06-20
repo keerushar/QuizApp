@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/pages/enter_name_page.dart';
 
 class GetStartedPages extends StatelessWidget {
   const GetStartedPages({super.key});
@@ -15,9 +16,10 @@ class GetStartedPages extends StatelessWidget {
             ),
             Text("Welcome to quiz app"),
         
-            ElevatedButton(onPressed: (){}, child: Text("Let's get started"))
-          ],
-          
+            ElevatedButton(onPressed: (){
+              Navigator.of(context).push(MaterialPageRoute(builder: (_)=> const EnterNamePage()));
+            }, child: Text("Let's get started"))
+          ],   
         ),
       ),
     );

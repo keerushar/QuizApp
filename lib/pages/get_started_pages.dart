@@ -7,20 +7,24 @@ class GetStartedPages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Image.asset("assets/images/get_started.png"),
-            ),
-            Text("Welcome to quiz app"),
-        
-            ElevatedButton(onPressed: (){
-              Navigator.of(context).push(MaterialPageRoute(builder: (_)=> const EnterNamePage()));
-            }, child: Text("Let's get started"))
-          ],   
-        ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Expanded(
+              child: Center(
+                  child: Text(
+            "Welcome to Quiz App",
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 30),
+          ))),
+          ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => const EnterNameScreen()));
+              },
+              child: const Text("Let's get Started"))
+        ],
       ),
     );
   }

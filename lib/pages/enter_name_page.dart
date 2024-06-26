@@ -1,52 +1,56 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/models/gk_model.dart';
 import 'package:quiz_app/pages/quiz_play_page.dart';
 
-class EnterNamePage extends StatelessWidget {
-  const EnterNamePage({super.key});
+class EnterNameScreen extends StatefulWidget {
+  const EnterNameScreen({super.key});
+
+  @override
+  State<EnterNameScreen> createState() => _EnterNameScreenState();
+}
+
+class _EnterNameScreenState extends State<EnterNameScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final _nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    final formKey = GlobalKey<FormState>();
-    TextEditingController? inputNameController;
-
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Form(
-          key: formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Image.asset("assets/images/get_started.png"),
+      body: Form(
+        key: _formKey,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text("Enter your name to get started!"),
+            TextFormField(
+              controller: _nameController,
+              decoration: const InputDecoration(
+                labelText: 'Enter your name',
               ),
-              Text("Enter your name to get start"),
-              TextFormField(
-                cursorColor: Theme.of(context).primaryColor,
-                controller: inputNameController,
-                decoration: const InputDecoration(
-                  hintStyle: TextStyle(color: Colors.grey),
-                  hintText: "Enter your name",
-                  prefixIcon: Icon(Icons.person),
-                  contentPadding: EdgeInsets.only(top: 14),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your name';
-                  }
-                  return null;
-                },
-              ),
-              ElevatedButton(
-                  onPressed: () {
-                    if (formKey.currentState!.validate()) {
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (_) => QuizPlayPage(name: inputNameController!.text,topicName: "Fofdhs",questionsLength: [],)));
-                    }
-                  },
-                  child: Text("Let's play"))
-            ],
-          ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your name';
+                }
+                return null;
+              },
+            ),
+            ElevatedButton(
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => QuizScreen(
+                          name: _nameController.text,
+                          questionlenght: navigateQuestionsList,
+                          topicType: "General Knowledge"),
+                    ),
+                  );
+                }
+              },
+              child: const Text('Submit'),
+            ),
+          ],
         ),
       ),
     );

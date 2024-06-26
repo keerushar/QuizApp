@@ -41,7 +41,7 @@ class EnterNamePage extends StatelessWidget {
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
                       Navigator.of(context).push(
-                          MaterialPageRoute(builder: (_) => const QuizPlayPage()));
+                          MaterialPageRoute(builder: (_) => QuizPlayPage(name: inputNameController!.text,topicName: "Fofdhs",questionsLength: [],)));
                     }
                   },
                   child: Text("Let's play"))
